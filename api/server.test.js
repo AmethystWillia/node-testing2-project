@@ -80,4 +80,14 @@ describe('Test server endpoints', () => {
 
         expect(result.body.name).toBe('Jinx');
     });
+
+    test('[POST] /cats', async () => {
+        let result = await request(server)
+            .post('/cats')
+            .send({ name: 'Jinx', pelt: 'Black', temperment: 'Bitch <3' });
+        expect(result.status).toBe(201);
+
+        result = await Cats.getById(1);
+        expect(result.name).tobe('Jinx');
+    });
 });
