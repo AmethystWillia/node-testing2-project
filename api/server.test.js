@@ -90,4 +90,15 @@ describe('Test server endpoints', () => {
         result = await Cats.getById(1);
         expect(result.name).toBe('Jinx');
     });
+
+    test('[PUT] /cats/:id', async () => {
+        let { id } = await Cats.add({ name: 'Wisteria', pelt: 'Calico', temperment: 'Timid' });
+        let result = await request(server)
+            .put(`/cats/${id}`)
+            .send({ temperment: 'Snuggly' });
+        expect(result.body).toEqual({ id: 1, name: 'Wisteria', pelt: 'Calico', temperment: 'Snuggly' });
+
+        let cat = await Cats.getById(id);
+        expect(cat).toEqual({ id: 1, name: 'Wisteria', pelt: 'Calico', temperment: 'Snuggly' });
+    });
 });
