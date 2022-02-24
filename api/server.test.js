@@ -42,6 +42,14 @@ describe('Test cats model', () => {
 
         expect(result).toHaveProperty('name', 'Hades');
     });
+
+    test('Can update a cat', async () => {
+        const [id] = await db('cats').insert({ name: 'Eros', pelt: 'Calico', temperment: 'Playful' });
+        let result = await Cats.update(id, { temperment: 'Sweetie' });
+        result = Cats.getById(id);
+
+        expect(result).toHaveProperty('temperment', 'Sweetie');
+    });
 });
 
 describe('Test server endpoints', () => {});
