@@ -101,4 +101,14 @@ describe('Test server endpoints', () => {
         let cat = await Cats.getById(id);
         expect(cat).toEqual({ id: 1, name: 'Wisteria', pelt: 'Calico', temperment: 'Snuggly' });
     });
+
+    test('[DELETE] /cats/:id', async () => {
+        let { id } = await Cats.add({ name: 'Stray', pelt: 'Calico', temperment: 'Timid' });
+        let result = await request(server).delete(`/cats/${id}`);
+        expect(result.status).toBe(200);
+        expect(result.body).toEqual({ name: 'Stray', pelt: 'Calico', temperment: 'Timid' });
+
+        const cats = await db('cats');
+        expect(cats).toHaveLength(0);
+    });
 });
