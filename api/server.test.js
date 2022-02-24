@@ -73,4 +73,11 @@ describe('Test server endpoints', () => {
         expect(result.body).toBeInstanceOf(Array);
         expect(result.body).toHaveLength(0);
     });
+
+    test('[GET] /cats/:id', async () => {
+        let result = await Cats.add({ name: 'Jinx', pelt: 'Black', temperment: 'Bitch <3' });
+        result = await request(server).get(`/cats/${result.id}`);
+
+        expect(result.body.name).toBe('Jinx');
+    });
 });
