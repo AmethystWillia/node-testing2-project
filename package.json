@@ -6,7 +6,7 @@
     "test": "jest",
     "start": "node index.js",
     "server": "nodemon index.js",
-    "migrate": "knex migreate:latest",
+    "migrate": "knex migrate:latest",
     "seed": "knex seed:run"
   },
   "repository": {
