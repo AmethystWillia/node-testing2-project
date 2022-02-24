@@ -46,9 +46,10 @@ describe('Test cats model', () => {
     test('Can update a cat', async () => {
         const [id] = await db('cats').insert({ name: 'Eros', pelt: 'Calico', temperment: 'Playful' });
         let result = await Cats.update(id, { temperment: 'Sweetie' });
-        result = Cats.getById(id);
-
-        expect(result).toHaveProperty('temperment', 'Sweetie');
+        
+        expect(result).toEqual({ id, name: 'Eros', pelt: 'Calico', temperment: 'Sweetie' });
+        result = await Cats.getById(id);
+        expect(result).toEqual({ id, name: 'Eros', pelt: 'Calico', temperment: 'Sweetie' });
     });
 });
 

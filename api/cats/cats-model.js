@@ -16,8 +16,12 @@ const add = async (cat) => {
     return getById(id);
 };
 
-const update = (id, changes) => {
-    return db('cats');
+const update = async (id, changes) => {
+    await db('cats')
+        .update({ name: changes.name, pelt: changes.pelt, temperment: changes.temperment })
+        .where('id', id);
+
+    return getById(id);
 };
 
 const remove = (id) => {
