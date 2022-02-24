@@ -39,7 +39,11 @@ server.put('/cats/:id', (req, res, next) => {
 });
 
 server.delete('/cats/:id', (req, res, next) => {
-    res.json();
+    Cats.remove(req.params.id)
+        .then(cat => {
+            res.status(200).json(cat);
+        })
+        .catch(next);
 });
 
 module.exports = server;

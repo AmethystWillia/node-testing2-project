@@ -106,7 +106,7 @@ describe('Test server endpoints', () => {
         let { id } = await Cats.add({ name: 'Stray', pelt: 'Calico', temperment: 'Timid' });
         let result = await request(server).delete(`/cats/${id}`);
         expect(result.status).toBe(200);
-        expect(result.body).toEqual({ name: 'Stray', pelt: 'Calico', temperment: 'Timid' });
+        expect(result.body).toEqual({ id: 1, name: 'Stray', pelt: 'Calico', temperment: 'Timid' });
 
         const cats = await db('cats');
         expect(cats).toHaveLength(0);
