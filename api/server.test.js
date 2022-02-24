@@ -30,6 +30,10 @@ describe('Test cats model', () => {
 
         let kitties = await db('cats');
         expect(kitties).toHaveLength(1);
+
+        await Cats.add({ name: 'Little bit', pelt: 'Grey tabby', temperment: 'Blank' });
+        kitties = await db('cats');
+        expect(kitties).toHaveLength(2);
     });
 });
 
