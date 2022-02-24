@@ -51,6 +51,18 @@ describe('Test cats model', () => {
         result = await Cats.getById(id);
         expect(result).toEqual({ id, name: 'Eros', pelt: 'Calico', temperment: 'Sweetie' });
     });
+
+    test('Delete a cat', async () => {
+        let result = await Cats.add({ name: 'Wisteria', pelt: 'Calico', temperment: 'Snuggly' });
+        result = await Cats.getById(result.id);
+        expect(result).toHaveProperty('name', 'Wisteria');
+
+        result = await Cats.remove(result.id);
+        expect(result).toEqual({ id: 1, name: 'Wisteria', pelt: 'Calico', temperment: 'Snuggly' });
+
+        result = await Cats.getById(result.id);
+        expect(result).not.toBeDefined();
+    });
 });
 
 describe('Test server endpoints', () => {});
