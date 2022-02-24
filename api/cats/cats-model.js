@@ -4,12 +4,16 @@ const getAll = () => {
     return db('cats');
 };
 
-const getById = () => {
-    return db('cats');
+const getById = (id) => {
+    return db('cats')
+        .where('id', id)
+        .first();
 };
 
-const add = (cat) => {
-    return db('cats');
+const add = async (cat) => {
+    const [id] = await db('cats').insert(cat);
+
+    return getById(id);
 };
 
 const update = (id, changes) => {

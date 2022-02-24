@@ -25,8 +25,8 @@ describe('Test cats model', () => {
     });
 
     test('Can insert cats into table', async () => {
-        let result = await Cats.insert({ name: 'Venus', pelt: 'Calico', temperment: 'Timid' });
-        expect(result).toEqual({ name: 'Venus', pelt: 'Calico', temperment: 'Timid' });
+        let result = await Cats.add({ name: 'Venus', pelt: 'Calico', temperment: 'Timid' });
+        expect(result).toEqual({ id: 1, name: 'Venus', pelt: 'Calico', temperment: 'Timid' });
 
         let kitties = await db('cats');
         expect(kitties).toHaveLength(1);
