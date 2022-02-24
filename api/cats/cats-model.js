@@ -24,8 +24,14 @@ const update = async (id, changes) => {
     return getById(id);
 };
 
-const remove = (id) => {
-    return db('cats');
+const remove = async (id) => {
+    const result = await getById(id);
+
+    await db('cats')
+        .where('id', id)
+        .del();
+
+    return result;
 };
 
 module.exports = {
