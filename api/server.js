@@ -31,7 +31,11 @@ server.post('/cats', (req, res, next) => {
 });
 
 server.put('/cats/:id', (req, res, next) => {
-    res.json();
+    Cats.update(req.params.id, req.body)
+        .then(cat => {
+            res.status(200).json(cat);
+        })
+        .catch(next);
 });
 
 server.delete('/cats/:id', (req, res, next) => {
