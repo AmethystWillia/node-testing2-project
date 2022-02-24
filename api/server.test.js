@@ -88,6 +88,6 @@ describe('Test server endpoints', () => {
         expect(result.status).toBe(201);
 
         result = await Cats.getById(1);
-        expect(result.name).tobe('Jinx');
+        expect(result.name).toBe('Jinx');
     });
 });

@@ -23,7 +23,11 @@ server.get('/cats/:id', (req, res, next) => {
 });
 
 server.post('/cats', (req, res, next) => {
-    res.json();
+    Cats.add(req.body)
+        .then(cat => {
+            res.status(201).json(cat);
+        })
+        .catch(next);
 });
 
 server.put('/cats/:id', (req, res, next) => {
