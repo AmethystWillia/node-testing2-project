@@ -4,10 +4,14 @@ const Cats = require('./cats/cats-model');
 
 const server = express();
 
-server.unsubscribe(express.json());
+server.use(express.json());
 
 server.get('/cats', (req, res, next) => {
-    res.json();
+    Cats.getAll()
+        .then(all => {
+            res.status(200).json(all);
+        })
+        .catch(next);
 });
 
 server.get('/cats/:id', (req, res, next) => {
