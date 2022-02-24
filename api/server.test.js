@@ -35,6 +35,13 @@ describe('Test cats model', () => {
         kitties = await db('cats');
         expect(kitties).toHaveLength(2);
     });
+
+    test('Can retrieve cat by id', async () => {
+        const { id } = await Cats.add({ name: 'Hades', pelt: 'Black', temperment: 'Glutton' });
+        const result = await Cats.getById(id);
+
+        expect(result).toHaveProperty('name', 'Hades');
+    });
 });
 
 describe('Test server endpoints', () => {});
