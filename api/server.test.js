@@ -65,4 +65,12 @@ describe('Test cats model', () => {
     });
 });
 
-describe('Test server endpoints', () => {});
+describe('Test server endpoints', () => {
+    test('[GET] /cats', async () => {
+        let result = await request(server).get('/cats');
+
+        expect(result.status).toBe(200);
+        expect(result.body).toBeInstanceOf(Array);
+        expect(result.body).toHaveLength(0);
+    });
+});
